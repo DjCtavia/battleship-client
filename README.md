@@ -1,4 +1,4 @@
-#Battleship Client
+# Battleship Client
 
 **To fill later**
 
