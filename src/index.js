@@ -6,78 +6,54 @@ import {
     Route,
     Link
 } from 'react-router-dom';
+// Components
+import Home from './Home/index';
+import Game from './Game/index';
+import Servers from './Servers/index';
+import About from './About/index';
+import NoMatch from './NoMatch/index';
+// CSS
 import './index.css';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            window: {
-                width: 1920,
-                height: 1080,
-            },
-        };
-        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-    }
-
-    componentDidMount() {
-        this.updateWindowDimensions();
-        window.addEventListener("resize", this.updateWindowDimensions.bind(this));
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.updateWindowDimensions.bind(this));
-    }
-
-    updateWindowDimensions() {
-        this.setState({window: {width: window.innerWidth, height: window.innerHeight}});
-    }
-
-    generateGrid(gridSize) {
-        const gridList = [];
-
-        for (let iGrid = 0; iGrid < gridSize * gridSize; ++iGrid) {
-            let digit = iGrid % 10;
-            let cssClass;
-
-            if ((iGrid  - digit) % 20) {
-                cssClass = iGrid % 2 ? "container red" : "container blue";
-            } else {
-                cssClass = iGrid % 2 ? "container blue" : "container red";
-            }
-            gridList.push(
-                <div className={cssClass}><h1>{iGrid}</h1></div>
-            );
-        }
-        return gridList;
-    }
-
     render() {
         return (
             <Router>
-                <aside>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/servers">Servers</Link>
-                        </li>
-                        <li>
-                            <Link to="/game">Game</Link>
-                        </li>
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                    </ul>
-                </aside>
-                <Switch>
-                    <h1>{this.state.window.width} x {this.state.window.height}</h1>
-                    <div className="grid" style={{height: this.state.window.height, width: this.state.window.height}}>
-                        {this.generateGrid(10)}
-                    </div>
+                <div>
+                    <aside>
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/servers">Servers</Link>
+                            </li>
+                            <li>
+                                <Link to="/game">Game</Link>
+                            </li>
+                            <li>
+                                <Link to="/about">About</Link>
+                            </li>
+                        </ul>
+                    </aside>
+                    <Switch>
+                        <Route path="/servers">
+                            <Servers />
+                        </Route>
+                        <Route path="/game">
+                            <Game />
+                        </Route>
+                        <Route path="/about">
+                            <About />
+                        </Route>
+                        <Route exact path="/">
+                            <Home />
+                        </Route>
+                        <Route path="*">
+                            <NoMatch />
+                        </Route>
+                    </Switch>
                 </div>
-                </Switch>
             </Router>
         );
     }

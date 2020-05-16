@@ -3,14 +3,6 @@ body {
   padding: 0;
 }
 
-.grid {
-  display: grid;
-  border: solid 1px black;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  margin: 0 auto;
-}
-
 .red {
   background-color: red;
 }
@@ -21,7 +13,8 @@ body {
 
 .container {
   align-self: stretch;
-  border: solid 1px black;
+  border-right: solid black 1px;
+  border-bottom: solid black 1px;
   display: flex;
   align-items: center;
   justify-content: center;
