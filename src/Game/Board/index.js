@@ -16,11 +16,6 @@ export default class Board extends React.Component {
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions.bind(this));
-        console.log(ReactDOM.findDOMNode(this));
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.updateWindowDimensions.bind(this));
     }
 
     updateWindowDimensions() {

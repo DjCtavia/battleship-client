@@ -1,8 +1,9 @@
 import React from 'react';
 // Components
 import Board from './Board/index';
+import {IoContext} from '../Globals/socketio';
 
-export default class Game extends React.Component {
+class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,6 +12,7 @@ export default class Game extends React.Component {
         }
         this.handleChangeBoardSize = this.handleChangeBoardSize.bind(this);
         this.handleChangeGridSize = this.handleChangeGridSize.bind(this);
+        this.handleConnect = this.handleConnect.bind(this);
     }
 
     handleChangeBoardSize(e) {
@@ -25,9 +27,14 @@ export default class Game extends React.Component {
         });
     }
 
+    handleConnect(e) {
+        IoContext.emit('JoinServer', 128);
+    }
+
     render () {
         return (
             <main>
+                <button onClick={this.handleConnect}>Connect</button>
                 <input type='range' name='boardSize' value={this.state.boardSize * 100} min={1} max={100} maxLength={3} onChange={this.handleChangeBoardSize} />
                 <input type='range' name='gridSize' value={this.state.gridSize} min={1} max={10} maxLength={2} onChange={this.handleChangeGridSize} />
                 <h1>Game page is under construction</h1>
@@ -36,3 +43,5 @@ export default class Game extends React.Component {
         );
     }
 }
+
+export default Game;

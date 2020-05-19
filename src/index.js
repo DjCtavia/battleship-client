@@ -16,14 +16,28 @@ import NoMatch from './NoMatch/index';
 import './index.css';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isMenuOpen: true,
+        };
+        this.handleMenu = this.handleMenu.bind(this);
+    }
+
+    handleMenu(e) {
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen,
+        });
+    }
+
     render() {
         return (
             <Router>
-                <div>
-                    <aside>
+                <div id="app">
+                    <aside className={this.state.isMenuOpen ? "nav-open" : ""}>
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/" className="active">Home</Link>
                             </li>
                             <li>
                                 <Link to="/servers">Servers</Link>
@@ -35,6 +49,9 @@ class App extends React.Component {
                                 <Link to="/about">About</Link>
                             </li>
                         </ul>
+                    <button className={"nav-handler"} onClick={this.handleMenu}>
+                        {this.state.isMenuOpen ? "<<" : ">>"}
+                    </button>
                     </aside>
                     <Switch>
                         <Route path="/servers">

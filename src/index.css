@@ -3,6 +3,81 @@ body {
   padding: 0;
 }
 
+/* Navbar */
+#app {
+  display: flex;
+
+}
+
+main {
+  flex-grow: 1;
+  padding-left: 46px;
+}
+
+aside {
+  position: relative;
+  width: 0;
+  transition: width 0.4s ease;
+}
+
+.nav-open {
+  width: 125px;
+}
+
+.nav-handler {
+  background-color: rgba(76, 83, 175, 0.8);
+  border: none;
+  color: white;
+  display: inline-block;
+  background-color: rgba();
+  padding: 8px 8px;
+  position: absolute;
+  top: 8px;
+  right: 0;
+  text-align: center;
+  transform: translateX(100%);
+}
+
+.nav-handler:hover {
+  background-color: rgb(58, 63, 131);
+}
+
+.nav-handler:focus {
+  background-color: rgb(58, 63, 131);
+}
+
+aside ul {
+  height: 100vh;
+}
+
+ul {
+  background-color: #333;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: rgb(76, 83, 175);
+}
+
+.active:hover {
+  background-color: rgb(64, 69, 146);
+}
+
 .red {
   background-color: red;
 }
