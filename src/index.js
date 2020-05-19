@@ -7,10 +7,10 @@ import {
     Link
 } from 'react-router-dom';
 // Components
-import Home from './Home/index';
-import Game from './Game/index';
-import Servers from './Servers/index';
-import About from './About/index';
+import Home from './Home/home';
+import Game from './Game/game';
+import Servers from './Servers/servers';
+import About from './About/about';
 import NoMatch from './NoMatch/index';
 // CSS
 import './index.css';
