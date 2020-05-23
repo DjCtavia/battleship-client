@@ -1,13 +1,18 @@
 import React from 'react';
 import {IoContext} from '../Globals/socketio';
+// CSS
+import './servers.css';
+// components
+import ServerInfos from './serverinfos';
 
 export default class Servers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            servers: [],
             serverCreation: {
                 name: '',
-                pwd: '',
+                password: '',
                 boardSize: 10,
             },
         };
@@ -24,7 +29,7 @@ export default class Servers extends React.Component {
     }
 
     handleServerInCreationPassword(e) {
-        let newServerCreationObject = Object.assign(this.state.serverCreation, {pwd: e.target.value});
+        let newServerCreationObject = Object.assign(this.state.serverCreation, {password: e.target.value});
         this.setState({serverCreation: newServerCreationObject});
     }
 
@@ -42,7 +47,28 @@ export default class Servers extends React.Component {
         IoContext.emit('CreateServer', this.state.serverCreation);
     }
 
-    render () {
+    AddServer({id, name, usePassword})
+    {
+        console.log("serverName:", name, "usePassword:", usePassword);
+        const server = <ServerInfos key={id} name={name} usePassword={usePassword} />;
+        this.setState(prevState => ({
+            servers: [
+                ...prevState.servers,
+                server
+            ]
+        }));
+    }
+
+    componentDidMount()
+    {
+        this.AddServer({id: "abc", name: "Bijouxelilit", usePassword: true});
+        this.AddServer({id: "cbd", name: "QSdkgEEa", usePassword: false});
+        this.AddServer({id: "xza", name: "VDQFoo", usePassword: false});
+        this.AddServer({id: "azp", name: "QFQLGRGKRGOGISdksjjj", usePassword: false});
+        this.AddServer({id: "fqsm", name: "UnServerNormalQuoi", usePassword: true});
+    }
+
+    render() {
         return (
             <main>
                 <h1>Servers page is under construction</h1>
@@ -50,6 +76,18 @@ export default class Servers extends React.Component {
                 <input type="password" onChange={this.handleServerInCreationPassword}></input>
                 <input type="number" onChange={this.handleServerInCreationBoardSize}></input>
                 <button onClick={this.handleCreateServer}>Create</button>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Server name</th>
+                            <th>Use password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.servers}
+                    </tbody>
+                </table>
             </main>
         );
     }
