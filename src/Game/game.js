@@ -1,6 +1,6 @@
 import React from 'react';
 // Components
-import Board from './Board/index';
+import Board from './board';
 import {IoContext} from '../Globals/socketio';
 
 class Game extends React.Component {
