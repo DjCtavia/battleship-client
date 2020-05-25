@@ -1,5 +1,5 @@
 import React from 'react';
-import {IoContext} from '../Globals/socketio';
+import {socket} from '../Globals/socketio';
 // CSS
 import './servers.css';
 // components
@@ -44,7 +44,7 @@ export default class Servers extends React.Component {
     }
 
     handleCreateServer(e) {
-        IoContext.emit('CreateServer', this.state.serverCreation);
+        socket.emit('CreateServer', this.state.serverCreation);
     }
 
     AddServer({id, name, usePassword})
@@ -61,11 +61,12 @@ export default class Servers extends React.Component {
 
     componentDidMount()
     {
-        this.AddServer({id: "abc", name: "Bijouxelilit", usePassword: true});
-        this.AddServer({id: "cbd", name: "QSdkgEEa", usePassword: false});
-        this.AddServer({id: "xza", name: "VDQFoo", usePassword: false});
-        this.AddServer({id: "azp", name: "QFQLGRGKRGOGISdksjjj", usePassword: false});
-        this.AddServer({id: "fqsm", name: "UnServerNormalQuoi", usePassword: true});
+        socket.on('GetServersList', data => { data.forEach(server => this.AddServer(server)); console.log(data); });
+        socket.emit('InitServerList');
+    }
+
+    componentWillUnmount() {
+        socket.off('GetServersList');
     }
 
     render() {
