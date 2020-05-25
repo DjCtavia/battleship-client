@@ -1,7 +1,7 @@
 import React from 'react';
 // Components
 import Board from './board';
-import {IoContext} from '../Globals/socketio';
+import {socket} from '../Globals/socketio';
 
 class Game extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class Game extends React.Component {
     }
 
     handleConnect(e) {
-        IoContext.emit('JoinServer', 128);
+        socket.emit('JoinServer', 128);
     }
 
     render () {

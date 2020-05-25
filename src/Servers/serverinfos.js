@@ -1,5 +1,5 @@
 import React from 'react';
-import {IoContext} from '../Globals/socketio';
+// import {socket} from '../Globals/socketio';
 
 export default class ServerInfos extends React.Component {
     render() {
